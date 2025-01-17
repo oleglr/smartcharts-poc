@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
 import {
@@ -22,14 +21,11 @@ import {
   CrossHairCursor,
   EdgeIndicator,
   MouseCoordinateX,
-  MouseCoordinateY,
-  ZoomButtons,
-  withDeviceRatio,
-  withSize
+  MouseCoordinateY
 } from "react-financial-charts";
 import { initialData } from "./data/data";
 
- const App = () => {
+const App = () => {
   const ScaleProvider = discontinuousTimeScaleProviderBuilder().inputDateAccessor(
     (d) => new Date(d.date)
   );
@@ -55,7 +51,7 @@ import { initialData } from "./data/data";
 
   const elder = elderRay();
 
-  const calculatedData = elder(ema26(ema12(initialData)));
+  // const calculatedData = elder(ema26(ema12(initialData)));
   const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(
     initialData
   );
@@ -71,9 +67,9 @@ import { initialData } from "./data/data";
   const barChartHeight = gridHeight / 4;
   const barChartOrigin = (_, h) => [0, h - barChartHeight - elderRayHeight];
   const chartHeight = gridHeight - elderRayHeight;
-  const yExtents = (data) => {
-    return [data.high, data.low];
-  };
+  // const yExtents = (data) => {
+  //   return [data.high, data.low];
+  // };
   const dateTimeFormat = "%d %b";
   const timeDisplayFormat = timeFormat(dateTimeFormat);
 
@@ -169,7 +165,6 @@ import { initialData } from "./data/data";
           ]}
         />
 
-        <ZoomButtons />
         <OHLCTooltip origin={[8, 16]} />
       </Chart>
       <Chart
